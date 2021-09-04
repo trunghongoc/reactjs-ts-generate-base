@@ -29,6 +29,12 @@ then add this code lines bellow into your `package.json` file
 }
 ```
 
+## Install this package
+
+```bash
+npm i --save-dev generate-react-ts-code-base
+```
+
 ## create common folder
 
 cd to root project then
