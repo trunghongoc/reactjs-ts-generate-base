@@ -17,8 +17,8 @@ TARGET_PATH="$ABSOLUTE_PATH"
 # install necessary package
 echo -e "${GREEN_COLOR}Installing necessary package ...${NO_COLOR}"
 npm i -g husky
-npm i -s axios @reduxjs/toolkit uuid redux react-redux redux-persist redux-persist/lib/storage react-router-dom lodash
-npm i --save-dev env-cmd @types/uuid @types/lodash @types/react-router-dom lint-staged node-sass prettier pretty-quick
+(cd $TARGET_PATH && npm i --save axios @reduxjs/toolkit uuid redux react-redux redux-persist react-router-dom lodash)
+(cd $TARGET_PATH && npm i --save-dev env-cmd @types/uuid @types/lodash @types/react-router-dom lint-staged node-sass prettier pretty-quick)
 
 if [ -f "$TARGET_PATH/package.json" ]; then
   (npm run prepare)

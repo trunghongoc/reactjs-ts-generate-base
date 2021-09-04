@@ -1,5 +1,14 @@
 # Generating basic reactjs source code
 
+- This package will generate the simple code base that contains:
+  - redux toolkits
+  - react router dom
+  - dynamic layout
+  - dynamic env
+  - config axios
+  - some useful hooks, helpers function
+  - ...
+
 ## Create react ts app
 
 ```ts
@@ -71,25 +80,70 @@ import App from './App'
 const persistor: any = persistStore(store)
 
 // ...
-<Provider store={store}>
-  <PersistGate loading={null} persistor={persistor}>
-    <App />
-  </PersistGate>
-</Provider>
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
+)
 // ...
 ```
 
 ## Edit src/App.tsx to apply router
 
 ```tsx
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { Layout } from 'layouts/index'
+import { BackgroundTasks } from 'components/BackgroundTasks'
 
-// ...
-return (
-  <Router>
-    <Layout />
-  </Router>
-)
-// ...
+function App() {
+  return (
+    <Router>
+      <Link to="/">Go Home</Link> / <Link to="/login">Go to Login</Link> /
+      <Link to="/about">Go to About</Link>
+      <BackgroundTasks />
+      <Layout />
+      <div
+        style={{
+          padding: 10,
+          boxSizing: 'border-box',
+          border: '1px solid #ccc'
+        }}
+      >
+        Inspect element to see layout per page was changed
+      </div>
+    </Router>
+  )
+}
+
+export default App
 ```
+
+# Change/Update env
+
+- Change localhost to your domain at `./public/env`
+  ![env folder](./img-docs/public__env.png 'Change localhost to your domain')
+- Use command to run a specific env
+  ![env folder](./img-docs/package.json_change-env.png 'Use command to run a specific env')
+
+# Model & API
+
+- Write API request or all your models in `services` folder
+  ![services](./img-docs/services_user.png 'Write API request or all your models in services folder')
+
+# src/router
+
+- Config router (`./src/router`)
+  ![router](./img-docs/router-config.png './src/router')
+
+# src/layouts
+
+- Currently we have 3 layout demo at `./src/layouts`
+
+# src/pages
+
+- Define page component

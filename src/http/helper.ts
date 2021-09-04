@@ -15,9 +15,9 @@ export function authHeader(): IAxiosHeader {
   const userLocalStorage: string | null = localStorage.getItem('user') || '{}'
   const user: IUser = JSON.parse(userLocalStorage)
 
-  if (user && user.signInUserSession?.idToken?.jwtToken) {
+  if (user && user?.jwtToken) {
     return {
-      'Authorization': `Bearer ${user.signInUserSession?.idToken?.jwtToken}`,
+      'Authorization': `Bearer ${user?.jwtToken}`,
       'Access-Control-Allow-Origin': '*',
       'Accept': 'application/json',
       'Content-Type': 'application/json'

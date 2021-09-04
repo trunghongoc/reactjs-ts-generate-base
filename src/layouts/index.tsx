@@ -11,7 +11,7 @@ import { AuthenLayout } from './Authen'
 import { BlankLayout } from './Blank'
 
 import { IStore } from 'redux/type'
-import { RouterItemType } from 'router/type'
+import { IRouterItem } from 'router/type'
 import { IProps, LAYOUT_NAME } from './type'
 import { IUser } from 'services/user/type'
 
@@ -29,12 +29,12 @@ export const Layout: FC<IProps> = ({
   children,
   ...props
 }: IProps): JSX.Element => {
-  const currentRoute: RouterItemType | null = useSelector(
-    (state: IStore): RouterItemType | null => state.router.current,
+  const currentRoute: IRouterItem | null = useSelector(
+    (state: IStore): IRouterItem | null => state.router.current,
     shallowEqual
   )
-  const user: IUser = useSelector(
-    (state: IStore): IUser => state.user.currentUser,
+  const user: IUser | null = useSelector(
+    (state: IStore): IUser | null => state.user.currentUser,
     shallowEqual
   )
 
@@ -49,7 +49,7 @@ export const Layout: FC<IProps> = ({
     <CurrentLayout>
       <Suspense fallback={<FallbackLoading />}>
         <Switch>
-          {routers.map((router: RouterItemType, index: number): JSX.Element => {
+          {routers.map((router: IRouterItem, index: number): JSX.Element => {
             const { path, exact, isPrivate, component: Page } = router
 
             return (

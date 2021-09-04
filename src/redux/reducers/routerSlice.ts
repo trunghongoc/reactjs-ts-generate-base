@@ -1,7 +1,7 @@
 import { takeRight } from 'lodash'
 import { createSlice } from '@reduxjs/toolkit'
-import { RouterStateType } from 'redux/type'
-import { RouterItemType } from 'router/type.d'
+import { IRouterState } from 'redux/type'
+import { IRouterItem } from 'router/type'
 
 export const routerSlice: any = createSlice({
   name: 'router',
@@ -11,14 +11,14 @@ export const routerSlice: any = createSlice({
   },
   reducers: {
     setRouterConfig: (
-      state: RouterStateType,
-      action: { payload: RouterItemType }
+      state: IRouterState,
+      action: { payload: IRouterItem }
     ): void => {
       state.current = action.payload
     },
     addToRouterHistories: (
-      state: RouterStateType,
-      action: { payload: RouterItemType }
+      state: IRouterState,
+      action: { payload: IRouterItem }
     ): void => {
       const maxHistoriesItem: number = 10
       const [lastRouter] = takeRight(state.histories, 1)
@@ -27,7 +27,7 @@ export const routerSlice: any = createSlice({
         : false
 
       if (!isSameLastRouter) {
-        const newHistories: RouterItemType[] = takeRight(
+        const newHistories: IRouterItem[] = takeRight(
           [...state.histories, action.payload],
           maxHistoriesItem
         )

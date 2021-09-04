@@ -1,4 +1,4 @@
-import { http } from 'http'
+import { http } from 'http/index'
 import { ILoginParams } from './type'
 
 class UserService {
