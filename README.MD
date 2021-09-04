@@ -29,6 +29,20 @@ then add this code lines bellow into your `package.json` file
 }
 ```
 
+## Config tslint
+
+Add these option to `./tsconfig.json`
+
+```
+{
+  "compilerOptions": {
+    // ...
+    "baseUrl": "./src",
+    // ...
+  }
+}
+```
+
 ## Install this package
 
 ```bash
@@ -41,7 +55,7 @@ cd to root project then
 run
 
 ```bash
-bash ./node_modules/generate-react-ts-code-base/main.sh
+bash ./node_modules/generate-react-ts-code-base/app.sh
 ```
 
 ## Edit src/index.js to appy redux-persist

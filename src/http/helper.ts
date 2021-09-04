@@ -1,7 +1,7 @@
-import { UserType } from 'services/user/type.d'
+import { IUser } from 'services/user/type'
 import { IAxiosHeader } from './type'
 
-export const serialize: any = (obj: object): string => {
+export const serialize: any = (obj: any): string => {
   const str: any = []
   for (const p in obj) {
     if (obj.hasOwnProperty(p)) {
@@ -13,7 +13,7 @@ export const serialize: any = (obj: object): string => {
 
 export function authHeader(): IAxiosHeader {
   const userLocalStorage: string | null = localStorage.getItem('user') || '{}'
-  const user: UserType = JSON.parse(userLocalStorage)
+  const user: IUser = JSON.parse(userLocalStorage)
 
   if (user && user.signInUserSession?.idToken?.jwtToken) {
     return {

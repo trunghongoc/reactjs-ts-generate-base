@@ -1,6 +1,6 @@
-import { Environemt } from './environment'
+import { IEnvItem, ENV_ENUM } from './environment'
 
-export const environments: Environemt = {
-  envName: 'development',
+export const environments: IEnvItem = {
+  envName: ENV_ENUM.development,
   fileConfigPath: 'env/development.json'
 }

@@ -1,19 +1,15 @@
+import { get } from 'lodash'
+
 import { environments as development } from './development'
 import { environments as testing } from './testing'
 import { environments as production } from './production'
 import { environments as uat } from './uat'
 
-import { Environemt } from './environment'
+import { ENV_ENUM, IEnvList, IEnvItem } from './environment'
 
-interface ListENV {
-  development: Environemt
-  testing: Environemt
-  production: Environemt
-  uat: Environemt
-}
+const currentEnv: IEnvItem | string =
+  process.env.REACT_APP_ENV || ENV_ENUM.production
 
-const currentEnv: string = process.env.REACT_APP_ENV || 'development'
+const envList: IEnvList = { development, testing, production, uat }
 
-const listEnv: ListENV = { development, testing, production, uat }
-
-export const env: Environemt = listEnv[currentEnv]
+export const env: ENV_ENUM = get(envList, currentEnv)

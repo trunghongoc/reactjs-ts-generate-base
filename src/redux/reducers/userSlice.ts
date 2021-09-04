@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { UserType } from 'services/user/type'
+import { IUser } from 'services/user/type'
 
 export const userSlice: any = createSlice({
   name: 'user',
@@ -8,7 +8,7 @@ export const userSlice: any = createSlice({
     currentUser: {}
   },
   reducers: {
-    setCurrentUser: (state: any, action: { payload: UserType }): void => {
+    setCurrentUser: (state: any, action: { payload: IUser }): void => {
       state.currentUser = action.payload
     }
   }
