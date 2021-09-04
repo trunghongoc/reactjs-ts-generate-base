@@ -10,7 +10,7 @@
 
 # install necessary package
 (npm i -s axios @reduxjs/toolkit uuid redux react-redux redux-persist redux-persist/lib/storage react-router-dom lodash)
-(npm i --save-dev env-cmd husky @types/uuid copy-webpack-plugin @types/lodash @types/react-router-dom eslint-config-prettier eslint-plugin-prettier lint-staged node-sass prettier pretty-quick tslint tslint-config-prettier tslint-plugin-prettier tslint-react typescript)
+(npm i --save-dev env-cmd husky @types/uuid @types/lodash @types/react-router-dom lint-staged node-sass prettier pretty-quick)
 
 if [ -f ".//package.json" ]; then
   (npm run prepare)
