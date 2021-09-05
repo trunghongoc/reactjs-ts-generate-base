@@ -1,6 +1,6 @@
 {
   "name": "generate-react-ts-code-base",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Generate reactjs with typescript code base",
   "main": "index.js",
   "scripts": {
