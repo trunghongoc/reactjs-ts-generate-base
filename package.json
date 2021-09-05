@@ -1,8 +1,8 @@
 {
   "name": "generate-react-ts-code-base",
-  "version": "1.0.19",
+  "version": "1.0.30",
   "description": "Generate reactjs with typescript code base",
-  "main": "index.js",
+  "bin": "bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "echo \"preparing ...\""
@@ -29,6 +29,7 @@
   "dependencies": {
     "boxen": "^5.0.1",
     "chalk": "^4.1.2",
+    "fs-extra": "^10.0.0",
     "inquirer": "^8.1.2"
   }
 }

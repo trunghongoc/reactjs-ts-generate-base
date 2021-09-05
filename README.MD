@@ -1,127 +1,73 @@
 # Generating basic reactjs source code
 
-- This package will generate the simple code base that contains:
+- This package was based on create-react-app package, it will generate the simple code base that contains:
   - redux toolkits
-  - react router dom
+  - react router
   - dynamic layout
   - dynamic env
   - config axios
   - some useful hooks, helpers function
   - ...
 
-## Create react ts app
+# Install this package as global
 
-```ts
-npx create-react-app my-app --template typescript
+```
+npm i -g generate-react-ts-code-base
 
 // or
 
-yarn create react-app my-app --template typescript
+yarn global add generate-react-ts-code-base
 ```
 
-then add this code lines bellow into your `package.json` file
+# Install this package inside an exist reactjs project
 
 ```
-"scripts": {
-  "start": "react-scripts start",
-  "start:dev": "env-cmd -f .env.development npm start",
-  "start:testing": "env-cmd -f .env.testing npm start",
-  "start:prod": "env-cmd -f .env.production npm start",
-  "build": "react-scripts build",
-  "build:dev": "env-cmd -f .env.development npm run build",
-  "build:testing": "env-cmd -f .env.testing npm run build",
-  "build:prod": "env-cmd -f .env.production npm run build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject",
-  "lint:ts": "tslint 'src/**/*.{ts,tsx,js}'",
-  "prepare": "husky install"
-}
+npm i -s generate-react-ts-code-base
+
+// or
+
+yarn add generate-react-ts-code-base
 ```
 
-## Config tslint
+# Usuage
 
-Add these option to `./tsconfig.json`
-
-```
-{
-  "compilerOptions": {
-    // ...
-    "baseUrl": "./src",
-    // ...
-  }
-}
-```
-
-## Install this package
+1. Create reactjs type script from nothing
 
 ```bash
-npm i --save-dev generate-react-ts-code-base
+npx generate-react-ts-code-base [option]
+
+// or
+
+yarn run generate-react-ts-code-base [option]
 ```
 
-## create common folder
-
-cd to root project then
-run
+For example:
 
 ```bash
-bash ./node_modules/generate-react-ts-code-base/app.sh
+npx generate-react-ts-code-base --name=my-react-app
 ```
 
-## Edit src/index.js to appy redux-persist
+2. Add the code base to an exist react app
 
-```tsx
-import { PersistGate } from 'redux-persist/integration/react'
-import { persistStore } from 'redux-persist'
-import store from './redux/store'
-import { Provider } from 'react-redux'
+- Move to your root react app
+- Run this command bellow
 
-import App from './App'
-
-const persistor: any = persistStore(store)
-
-// ...
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <App />
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
-)
-// ...
+```bash
+npx generate-react-ts-code-base [option]
 ```
 
-## Edit src/App.tsx to apply router
+For example:
 
-```tsx
-import { BrowserRouter as Router, Link } from 'react-router-dom'
-import { Layout } from 'layouts/index'
-import { BackgroundTasks } from 'components/BackgroundTasks'
-
-function App() {
-  return (
-    <Router>
-      <Link to="/">Go Home</Link> / <Link to="/login">Go to Login</Link> /
-      <Link to="/about">Go to About</Link>
-      <BackgroundTasks />
-      <Layout />
-      <div
-        style={{
-          padding: 10,
-          boxSizing: 'border-box',
-          border: '1px solid #ccc'
-        }}
-      >
-        Inspect element to see layout per page was changed
-      </div>
-    </Router>
-  )
-}
-
-export default App
+```bash
+npx generate-react-ts-code-base --name=my-react-app --is-exist-app
 ```
+
+# Options
+
+[--name=<project name>] [--is-exist-app]
+
+- `--name`: Name of the project you want to create
+- `--is-exist-app`: don't create new app, just add some files or lines to your source code
 
 # Change/Update env
 
