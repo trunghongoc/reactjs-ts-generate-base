@@ -1,0 +1,14 @@
+{
+  "folder": {
+    "componentPath": "src/components",
+    "envPath": "src/environments",
+    "helperPath": "src/helper",
+    "hookPath": "src/hooks",
+    "httpPath": "src/http",
+    "layoutPath": "src/layouts",
+    "pageComponentPath": "src/pages",
+    "reduxPath": "src/redux",
+    "routerPath": "src/router",
+    "servicePath": "src/services"
+  }
+}

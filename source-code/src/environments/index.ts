@@ -13,3 +13,4 @@ const currentEnv: IEnvItem | string =
 const envList: IEnvList = { development, testing, production, uat }
 
 export const env: IEnvItem = get(envList, currentEnv)
+export * from './type'

@@ -2,18 +2,19 @@ import { FC, Suspense, useMemo } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { useSelector, shallowEqual } from 'react-redux'
 
-import RouterService from 'services/router/index.service'
-
 import { routers } from 'router'
+import { IRouterItem } from 'router/type'
 import { useCheckIsLogedIn } from 'hooks/user'
 import { AdminLayout } from './Admin'
 import { AuthenLayout } from './Authen'
 import { BlankLayout } from './Blank'
 
 import { IStore } from 'redux/type'
-import { IRouterItem } from 'router/type'
-import { IProps, LAYOUT_NAME } from './type'
+import RouterService from 'services/router'
 import { IUser } from 'services/user/type'
+import { IProps, LAYOUT_NAME } from './type'
+
+import './style.scoped.scss'
 
 const LAYOUT: any = {
   [LAYOUT_NAME.ADMIN]: AdminLayout,

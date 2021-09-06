@@ -1,1 +1,3 @@
-export const app = () => {}
+const app = () => {}
+
+module.exports.app = app

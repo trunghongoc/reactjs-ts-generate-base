@@ -97,3 +97,4 @@ http.interceptors.response.use(
 )
 
 export { http }
+export * from './type'

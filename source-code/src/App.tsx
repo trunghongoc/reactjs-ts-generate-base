@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Link } from 'react-router-dom'
-import { Layout } from 'layouts/index'
+import { Layout } from 'layouts'
 import { BackgroundTasks } from 'components/BackgroundTasks'
 
 function App() {

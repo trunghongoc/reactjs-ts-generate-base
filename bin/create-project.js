@@ -1,82 +1,55 @@
 const { spawn, spawnSync, exec } = require('child_process')
 const chalk = require('chalk')
+const path = require('path')
 
 const { TEMPLATES } = require('./question')
 const { isYarn, CURR_DIR } = require('./helper')
 const { updateTslintConfig } = require('./updateTslintConfig')
 const { updatePackageJsonFile } = require('./updatePackageJsonFile')
 const { copyFileToApp } = require('./copyFiles')
+const { installCreateReactApp } = require('./installCreateReactApp')
+const { installNecessaryPackages } = require('./installNecessaryPackages')
+const { isExistApp } = require('./checkIsExistReactProject')
+const { standardizedProjectName } = require('./standardizedProjectName')
 
-module.exports.createTypescriptProject = ({ name, template, hasExistApp }) => {
-  const TARGET_PATH = `${CURR_DIR}`
+module.exports.createTypescriptProject = async ({ name }) => {
+  name = standardizedProjectName({ name })
 
-  if (!name) {
-    name = 'reactjs-ts-app'
-  }
-  name = `${TARGET_PATH}/${name}`
+  const TARGET_PATH = isExistApp ? CURR_DIR : path.join(CURR_DIR, name)
 
-  if (!TEMPLATES.includes(template)) {
-    template = 'typescript'
-  }
+  console.log('TARGET_PATH:', TARGET_PATH)
 
-  if (!hasExistApp) {
-    // create react ts app
-    spawn(
-      isYarn ? 'yarn' : 'npx',
-      [
-        `${
-          isYarn ? 'create react-app' : 'create-react-app'
-        } ${name} --template typescript`
-      ],
-      { shell: true, stdio: 'inherit' }
-    )
+  if (!isExistApp) {
+    await installCreateReactApp({ isYarn, projectName: name, TARGET_PATH })
   }
 
-  console.log(chalk.green(`🥳 Install necessary package ...`))
-  spawn(
-    isYarn ? 'yarn' : 'npm',
-    [
-      `${
-        isYarn ? 'add' : 'install --save'
-      } axios @reduxjs/toolkit uuid redux react-redux redux-persist react-router-dom lodash`
-    ],
-    { shell: true, stdio: 'inherit' }
-  )
-  spawn(
-    isYarn ? 'yarn' : 'npm',
-    [
-      `${
-        isYarn ? 'add --dev' : 'install --save-dev'
-      } env-cmd @types/uuid @types/lodash @types/react-router-dom lint-staged node-sass prettier pretty-quick`
-    ],
-    { shell: true, stdio: 'inherit' }
-  )
-
-  // update tslint config
-  console.log(chalk.green(`🥳 Config base URL ...`))
-  updateTslintConfig()
-
-  // Config scripts
-  console.log(chalk.green(`🥳 Config scripts ...`))
-  updatePackageJsonFile()
-
-  // Run prepare
-  console.log(chalk.green(`🥳 Run prepare ...`))
-  spawn(isYarn ? 'yarn' : 'npm', ['run prepare'], {
-    shell: true,
-    stdio: 'inherit'
-  })
-
-  // copy files
-  copyFileToApp({
-    CURR_DIR,
+  // install necessary package
+  await installNecessaryPackages({
+    isYarn,
     TARGET_PATH
   })
 
-  console.log(chalk.cyan('❤️ ❤️ ❤️  DONE  ❤️ ❤️ ❤️'))
-  console.log(
-    chalk.blueBright(
-      'Pls rate 1 star to https://github.com/trunghongoc/reactjs-ts-generate-base if it useful for you'
-    )
-  )
+  // update tslint config
+  console.log(chalk.green(`🥳 Config base URL ...`))
+  await updateTslintConfig({
+    TARGET_PATH
+  })
+
+  // Config scripts
+  console.log(chalk.green(`🥳 Config scripts ...`))
+  await updatePackageJsonFile({ TARGET_PATH })
+
+  // Run prepare
+  console.log(chalk.green(`🥳 Run prepare ...`))
+  await spawnSync(isYarn ? 'yarn' : 'npm', ['run prepare'], {
+    shell: true,
+    stdio: 'inherit',
+    cwd: TARGET_PATH
+  })
+
+  // copy files
+  await copyFileToApp({
+    CURR_DIR,
+    TARGET_PATH
+  })
 }

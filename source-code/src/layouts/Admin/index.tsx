@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import { IProps } from './type'
 
-import './style.scss'
+import './style.scoped.scss'
 
 export const AdminLayout: FC<IProps> = ({ children }: IProps): JSX.Element => {
   return (

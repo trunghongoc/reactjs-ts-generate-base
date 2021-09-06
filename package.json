@@ -1,8 +1,10 @@
 {
   "name": "generate-react-ts-code-base",
-  "version": "1.0.30",
+  "version": "1.0.67",
   "description": "Generate reactjs with typescript code base",
-  "bin": "bin/index.js",
+  "bin": {
+    "ahihi": "bin/index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "echo \"preparing ...\""
@@ -12,13 +14,14 @@
     "url": "git+https://github.com/trunghongoc/reactjs-ts-generate-base.git"
   },
   "keywords": [
+    "create code base",
     "code base",
     "reactjs",
+    "react code base",
+    "react base",
+    "react ts",
     "react typescript",
-    "code base react",
-    "code base reactjs",
-    "code base react ts",
-    "react ts"
+    "create react app"
   ],
   "author": "trunghongoc",
   "license": "ISC",

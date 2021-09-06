@@ -1,26 +1,57 @@
 const chalk = require('chalk')
-const { copy } = require('fs-extra')
+const { copy, copySync } = require('fs-extra')
 const { appConfig } = require('./config')
 const path = require('path')
+
+// const mkdir = dir => {
+//   if (!fs.existsSync(dir)) {
+//     fs.mkdirSync(dir, { recursive: true })
+//   }
+// }
+// const mkdirIfNotExist = () => {
+//   mkdir(`${TARGET_PATH}/public/env`)
+//   mkdir(`${TARGET_PATH}/src/components`)
+//   mkdir(`${TARGET_PATH}/src`)
+// }
 
 const copyFileToApp = ({ TARGET_PATH }) => {
   // copy files
   console.log(chalk.green(`🥳 Start generate file ...`))
-  const packagePath =
-    path.dirname(require.resolve('generate-react-ts-code-base')) +
-    '/source-code'
+  const packagePath = path.join(
+    path.dirname(require.resolve(appConfig.packageName)),
+    'source-code'
+  )
 
-  copy(`${packagePath}/.husky`, `${TARGET_PATH}/.husky`)
-  copy(`${packagePath}/.vscode`, `${TARGET_PATH}/.vscode`)
-  copy(`${packagePath}/env`, `${TARGET_PATH}/public/env`)
-  copy(`${packagePath}/src`, `${TARGET_PATH}/src`)
+  const genPackagePath = (...fileOrFolderName) => {
+    return path.join(packagePath, ...fileOrFolderName)
+  }
+  const genTargetPath = (...fileOrFolderName) => {
+    return path.join(TARGET_PATH, ...fileOrFolderName)
+  }
+  const execCopySync = (from, to) => {
+    from = from.split('/')
+    to = to.split('/')
 
-  copy(`${packagePath}/.editorconfig`, `${TARGET_PATH}/.editorconfig`)
-  copy(`${packagePath}/.env.development`, `${TARGET_PATH}/.env.development`)
-  copy(`${packagePath}/.env.production`, `${TARGET_PATH}/.env.production`)
-  copy(`${packagePath}/.env.testing`, `${TARGET_PATH}/.env.testing`)
-  copy(`${packagePath}/.env.uat`, `${TARGET_PATH}/.env.uat`)
-  copy(`${packagePath}/.prettierignore`, `${TARGET_PATH}/.prettierignore`)
-  copy(`${packagePath}/.prettierrc`, `${TARGET_PATH}/.prettierrc`)
+    copySync(genPackagePath(...from), genTargetPath(...to), {
+      overwrite: true
+    })
+  }
+
+  execCopySync('.husky', '.husky')
+  execCopySync('.vscode', '.vscode')
+  execCopySync('env', 'public/env')
+  execCopySync('src', 'src')
+
+  execCopySync('.editorconfig', '.editorconfig')
+  execCopySync('.env.development', '.env.development')
+  execCopySync('.env.production', '.env.production')
+  execCopySync('.env.testing', '.env.testing')
+  execCopySync('.env.uat', '.env.uat')
+
+  execCopySync('.prettierignore', '.prettierignore')
+  execCopySync('.prettierrc', '.prettierrc')
+  execCopySync('react-project.config.json', 'react-project.config.json')
+  execCopySync('craco.config.js', 'craco.config.js')
+  execCopySync('tsconfig.paths.json', 'tsconfig.paths.json')
 }
 module.exports.copyFileToApp = copyFileToApp
