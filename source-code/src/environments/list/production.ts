@@ -1,4 +1,4 @@
-import { IEnvItem, ENV_ENUM } from './type'
+import { IEnvItem, ENV_ENUM } from './../type'
 
 export const environments: IEnvItem = {
   envName: ENV_ENUM.production,

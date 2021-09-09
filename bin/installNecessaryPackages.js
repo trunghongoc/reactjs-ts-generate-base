@@ -18,7 +18,7 @@ const installNecessaryPackages = ({ isYarn, TARGET_PATH }) => {
     [
       `${
         isYarn ? 'add --dev' : 'install --save-dev'
-      } env-cmd @types/uuid @types/lodash @types/react-router-dom lint-staged node-sass prettier pretty-quick husky @craco/craco craco-alias craco-plugin-scoped-css copy-webpack-plugin`
+      } env-cmd tslint tslint-react tslint-config-prettier tslint-plugin-prettier @types/uuid @types/lodash @types/react-router-dom lint-staged node-sass prettier pretty-quick husky @craco/craco craco-alias craco-plugin-scoped-css copy-webpack-plugin @types/webpack-env`
     ],
     { shell: true, stdio: 'inherit', cwd: TARGET_PATH }
   )

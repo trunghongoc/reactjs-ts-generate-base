@@ -9,10 +9,3 @@ export interface IEnvItem {
   envName: ENV_ENUM
   fileConfigPath: string
 }
-
-export interface IEnvList {
-  development: IEnvItem
-  testing: IEnvItem
-  production: IEnvItem
-  uat: IEnvItem
-}

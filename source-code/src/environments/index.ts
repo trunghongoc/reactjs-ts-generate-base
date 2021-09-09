@@ -1,16 +1,13 @@
-import { get } from 'lodash'
+import { envList } from './getAllEnvList'
+import { environments as production } from './list/production'
 
-import { environments as development } from './development'
-import { environments as testing } from './testing'
-import { environments as production } from './production'
-import { environments as uat } from './uat'
+import { ENV_ENUM, IEnvItem } from './type'
 
-import { ENV_ENUM, IEnvList, IEnvItem } from './type'
+console.log('envList:', envList)
 
 const currentEnv: IEnvItem | string =
   process.env.REACT_APP_ENV || ENV_ENUM.production
 
-const envList: IEnvList = { development, testing, production, uat }
-
-export const env: IEnvItem = get(envList, currentEnv)
-export * from './type'
+export const env: IEnvItem =
+  envList.find((item: IEnvItem): boolean => item.envName === currentEnv) ||
+  production

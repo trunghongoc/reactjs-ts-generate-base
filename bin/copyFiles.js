@@ -39,19 +39,15 @@ const copyFileToApp = ({ TARGET_PATH }) => {
 
   execCopySync('.husky', '.husky')
   execCopySync('.vscode', '.vscode')
-  execCopySync('env', 'public/env')
+  execCopySync('.env', '.env')
+  execCopySync('public/env', 'public/env')
   execCopySync('src', 'src')
-
-  execCopySync('.editorconfig', '.editorconfig')
-  execCopySync('.env.development', '.env.development')
-  execCopySync('.env.production', '.env.production')
-  execCopySync('.env.testing', '.env.testing')
-  execCopySync('.env.uat', '.env.uat')
 
   execCopySync('.prettierignore', '.prettierignore')
   execCopySync('.prettierrc', '.prettierrc')
-  execCopySync('react-project.config.json', 'react-project.config.json')
+  // execCopySync('react-project.config.json', 'react-project.config.json')
   execCopySync('craco.config.js', 'craco.config.js')
   execCopySync('tsconfig.paths.json', 'tsconfig.paths.json')
+  execCopySync('tslint.json', 'tslint.json')
 }
 module.exports.copyFileToApp = copyFileToApp
