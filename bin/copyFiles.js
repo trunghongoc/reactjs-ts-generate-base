@@ -19,20 +19,17 @@ const copyFileToApp = ({ TARGET_PATH }) => {
   console.log(chalk.green(`🥳 Start generate file ...`))
   const packagePath = path.join(
     path.dirname(require.resolve(appConfig.packageName)),
-    'source-code'
+    'repo-code-current'
   )
 
-  const genPackagePath = (...fileOrFolderName) => {
-    return path.join(packagePath, ...fileOrFolderName)
+  const genPackagePath = fileOrFolderName => {
+    return path.join(packagePath, fileOrFolderName)
   }
-  const genTargetPath = (...fileOrFolderName) => {
-    return path.join(TARGET_PATH, ...fileOrFolderName)
+  const genTargetPath = fileOrFolderName => {
+    return path.join(TARGET_PATH, fileOrFolderName)
   }
   const execCopySync = (from, to) => {
-    from = from.split('/')
-    to = to.split('/')
-
-    copySync(genPackagePath(...from), genTargetPath(...to), {
+    copySync(genPackagePath(from), genTargetPath(to), {
       overwrite: true
     })
   }
